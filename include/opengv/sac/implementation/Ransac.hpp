@@ -126,11 +126,12 @@ opengv::sac::Ransac<PROBLEM_T>::computeModel(
     }
   }
 
-  if(debug_verbosity_level > 0)
-    fprintf(stdout,
-        "[sm::RandomSampleConsensus::computeModel] Model: %zu size, %d inliers.\n",
-        model_.size(), n_best_inliers_count );
-
+  
+  FILE *fp;
+  fp = fopen("ransac_inliers.txt", "w");
+  fprintf(fp, "%d", n_best_inliers_count );
+  fclose(fp);
+  
   if(model_.empty())
   {
     inliers_.clear();
